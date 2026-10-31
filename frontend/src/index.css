@@ -1,0 +1,45 @@
+@import "tailwindcss";
+
+/* Chart colour roles. Light values first, dark values stepped for the dark surface. */
+:root {
+  color-scheme: light;
+  --surface: #fcfcfb;
+  --grid: #e6e5e0;
+  --axis: #52514e;
+  --forecast: #2a78d6;
+  --actual: #eb6834;
+  --band: #cde2fb;
+  --too-high: #e34948;
+  --too-low: #2a78d6;
+  --bar: #2a78d6;
+  /* Calendar ramp: lighter = smaller miss, darker = bigger miss (same in both themes) */
+  --seq-1: #cde2fb;
+  --seq-2: #9ec5f4;
+  --seq-3: #6da7ec;
+  --seq-4: #3987e5;
+  --seq-5: #256abf;
+  --seq-6: #184f95;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --surface: #1a1a19;
+    --grid: #33332f;
+    --axis: #c3c2b7;
+    --forecast: #3987e5;
+    --actual: #d95926;
+    --band: #1f3a5f;
+    --too-high: #e66767;
+    --too-low: #3987e5;
+    --bar: #3987e5;
+  }
+}
+
+body {
+  background: var(--surface);
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-feature-settings: "tnum";
+}
+
+/* Recharts draws a focus box on click; hide it */
+.recharts-wrapper *:focus { outline: none; }

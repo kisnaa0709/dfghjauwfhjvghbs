@@ -1,0 +1,12 @@
+# requirements.txt  —  Step 5a of the Gridbricks backend
+#
+# Python's version of package.json "dependencies".
+# Install everything with:   pip install -r requirements.txt
+# (like `npm install`)
+#
+# `==` pins an exact version, so every machine (and Docker) gets the same code.
+# `[standard]` asks uvicorn to also install its faster optional extras.
+
+fastapi==0.162.0
+uvicorn[standard]==0.54.0
+requests==2.34.2
