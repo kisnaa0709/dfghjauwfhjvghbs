@@ -9,6 +9,14 @@ Gridbricks helps a UK utility's day-ahead trading team answer two questions:
 
 Scope: national-level wind only, Elexon BMRS data only, for purchase decisions made in **January 2026**.
 
+### Live demo
+
+| What | URL |
+|---|---|
+| Web app | https://dev-gridbricks-frontend.dhql6p.easypanel.host/ |
+| API | https://dev-gridbricks.dhql6p.easypanel.host/api/health |
+| Interactive API docs | https://dev-gridbricks.dhql6p.easypanel.host/docs |
+
 ---
 
 ## Quick start (Docker)
@@ -96,7 +104,7 @@ gridbricks/
 │   │   ├── api.js                 API calls
 │   │   ├── format.js              Number and UK-time formatting
 │   │   └── components/            Day view, accuracy view, charts
-│   ├── nginx.conf                 Serves the app, proxies /api to the backend
+│   ├── nginx.conf                 Serves the built app
 │   └── Dockerfile                 Node build, then nginx
 └── docker-compose.yml
 ```
@@ -123,6 +131,19 @@ gridbricks/
 - **Day view:** pick a delivery day and see the decision time, which forecast was used and how old it was, forecast vs actual with a likely-range band, the hourly error, and a data table.
 - **Accuracy view:** headline metrics, a calendar of daily error (click a day to open it), error by hour of day, the error distribution, and the worst misses.
 - Follows the system light/dark setting. Every chart has a hover tooltip, and the day view has a table alternative.
+
+---
+
+## Deployment (Easypanel)
+
+Backend and frontend are deployed as two separate services:
+
+| Service | Build | Port | URL |
+|---|---|---|---|
+| Backend | `backend/Dockerfile` | 8000 | https://dev-gridbricks.dhql6p.easypanel.host |
+| Frontend | `frontend/Dockerfile` | 80 | https://dev-gridbricks-frontend.dhql6p.easypanel.host |
+
+The browser calls the backend directly. Its address is set into the frontend when it's built, through the `VITE_API_URL` build argument, which defaults to the backend URL above. To point the frontend at a different backend, set that build argument and rebuild. The backend allows requests from any site (CORS), and it only has read endpoints.
 
 ---
 

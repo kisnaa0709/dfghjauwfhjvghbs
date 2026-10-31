@@ -6,7 +6,11 @@ services:
     restart: unless-stopped
 
   frontend:
-    build: ./frontend
+    build:
+      context: ./frontend
+      args:
+        # Local run: the browser reaches the backend on localhost:8000
+        VITE_API_URL: http://localhost:8000
     ports:
       - "3000:80"
     depends_on:
